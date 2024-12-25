@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - EduTech Institute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #00BFB3;
+            --secondary: #4A4A8F;
+            --text: #333;
+            --light: #f5f5f5;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            background-color: var(--light);
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-card h2 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .class-list, .task-list {
+            list-style: none;
+        }
+
+        .class-item, .task-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .class-item:last-child, .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-status {
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .status-pending {
+            background: #FFE5D9;
+            color: #D94E00;
+        }
+
+        .status-in-progress {
+            background: #E5F1FF;
+            color: #006FD9;
+        }
+
+        .status-completed {
+            background: #DCFCE7;
+            color: #15803D;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .show-sidebar .sidebar {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">EduTech Staff</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-chalkboard"></i>
+                            Classes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            Students
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-book"></i>
+                            Courses
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-calendar-alt"></i>
+                            Schedule
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <h1>Staff Dashboard</h1>
+                <div class="profile-section">
+                    <div class="profile-pic">J</div>
+                    <span>John Doe</span>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h2>Today's Classes</h2>
+                    <ul class="class-list">
+                        <li class="class-item">
+                            <strong>Web Development</strong> - 10:00 AM
+                        </li>
+                        <li class="class-item">
+                            <strong>Database Management</strong> - 1:00 PM
+                        </li>
+                        <li class="class-item">
+                            <strong>Mobile App Development</strong> - 3:00 PM
+                        </li>
+                    </ul>
+                </div>
+                <div class="dashboard-card">
+                    <h2>Tasks</h2>
+                    <ul class="task-list">
+                        <li class="task-item">
+                            <span>Grade Web Dev Projects</span>
+                            <span class="task-status status-pending">Pending</span>
+                        </li>
+                        <li class="task-item">
+                            <span>Prepare Database Quiz</span>
+                            <span class="task-status status-in-progress">In Progress</span>
+                        </li>
+                        <li class="task-item">
+                            <span>Update Course Material</span>
+                            <span class="task-status status-completed">Completed</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dashboard-card">
+                    <h2>Announcements</h2>
+                    <p>Staff meeting scheduled for Friday at 2 PM.</p>
+                    <p>New course proposals due by end of month.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://kit.fontawesome.com/your-kit-code.js"></script>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.querySelector('.dashboard-container').classList.toggle('show-sidebar');
+        }
+
+        // Add active class to current nav item
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-link.active')?.classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

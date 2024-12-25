@@ -1,0 +1,44 @@
+[
+  {
+    "username": "abc",
+    "password": "123"
+  },
+  {
+    "username": "user1",
+    "password": "password1"
+  },
+  {
+    "username": "admin",
+    "password": "admin"
+  },
+  {
+    "username": "akanksha",
+    "password": "1234"
+  },
+  {
+    "password": "1234",
+    "role": "staff"
+  },
+  {
+    "password": "1234",
+    "role": "student"
+  },
+  {
+    "password": "1234",
+    "role": "student"
+  },
+  {
+    "firstName": "akanksha",
+    "lastName": "mishra",
+    "email": "akanksha@gmail.com",
+    "password": "1234",
+    "role": "student"
+  },
+  {
+    "firstName": "akanksha",
+    "lastName": "mishra",
+    "email": "akankshamishra@gmail.com",
+    "password": "1234",
+    "role": "student"
+  }
+]

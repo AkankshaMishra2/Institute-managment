@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - EduTech Institute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #00BFB3;
+            --secondary: #4A4A8F;
+            --text: #333;
+            --light: #f5f5f5;
+            --sidebar-width: 250px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2rem;
+            background: var(--light);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .course-image {
+            height: 150px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-progress {
+            margin-top: 1rem;
+            background: #eee;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 75%;
+        }
+
+        .upcoming-assignments {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .assignment-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .assignment-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .assignment-item:last-child {
+            border-bottom: none;
+        }
+
+        .due-date {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .show-sidebar .sidebar {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Student Portal</h2>
+            <nav class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        My Courses
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tasks"></i>
+                        Assignments
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-calendar-check"></i>
+                        Attendance
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        Grades
+                    </a>
+                </li>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <h1>Welcome, John!</h1>
+                <div class="profile-section">
+                    <span>Student ID: ST12345</span>
+                </div>
+            </div>
+
+            <div class="course-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Web Development</h3>
+                        <p>Progress: 75%</p>
+                        <div class="course-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Database Management</h3>
+                        <p>Progress: 60%</p>
+                        <div class="course-progress">
+                            <div class="progress-bar" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Mobile App Development</h3>
+                        <p>Progress: 45%</p>
+                        <div class="course-progress">
+                            <div class="progress-bar" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upcoming-assignments">
+                <h2>Upcoming Assignments</h2>
+                <ul class="assignment-list">
+                    <li class="assignment-item">
+                        <div>
+                            <h4>JavaScript Final Project</h4>
+                            <p>Web Development</p>
+                        </div>
+                        <span class="due-date">Due: Tomorrow</span>
+                    </li>
+                    <li class="assignment-item">
+                        <div>
+                            <h4>Database Design</h4>
+                            <p>Database Management</p>
+                        </div>
+                        <span class="due-date">Due: Next Week</span>
+                    </li>
+                    <li class="assignment-item">
+                        <div>
+                            <h4>UI/UX Design</h4>
+                            <p>Mobile App Development</p>
+                        </div>
+                        <span class="due-date">Due: 2 Weeks</span>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://kit.fontawesome.com/your-kit-code.js"></script>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.querySelector('.dashboard-container').classList.toggle('show-sidebar');
+        }
+
+        // Add active class to current nav item
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-link.active')?.classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

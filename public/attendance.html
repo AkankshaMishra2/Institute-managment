@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management - EduTech Institute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #00BFB3;
+            --secondary: #4A4A8F;
+            --text: #333;
+            --light: #f5f5f5;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            background-color: var(--light);
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .attendance-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        select, input[type="date"] {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .attendance-table th, .attendance-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .attendance-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .attendance-status {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .status-btn {
+            padding: 0.25rem 0.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .present-btn {
+            background-color: #DCFCE7;
+            color: #15803D;
+        }
+
+        .present-btn:hover, .present-btn.active {
+            background-color: #15803D;
+            color: white;
+        }
+
+        .absent-btn {
+            background-color: #FFE5D9;
+            color: #D94E00;
+        }
+
+        .absent-btn:hover, .absent-btn.active {
+            background-color: #D94E00;
+            color: white;
+        }
+
+        .save-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 1rem;
+        }
+
+        .save-btn:hover {
+            background-color: #00A69B;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .show-sidebar .sidebar {
+                transform: translateX(0);
+            }
+
+            .attendance-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">EduTech Staff</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-user-check"></i>
+                            Attendance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-book"></i>
+                            Courses
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-calendar-alt"></i>
+                            Schedule
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <h1>Attendance Management</h1>
+            </div>
+
+            <div class="attendance-controls">
+                <div class="control-group">
+                    <label for="course-select">Course:</label>
+                    <select id="course-select">
+                        <option value="">Select Course</option>
+                        <option value="web-dev">Web Development</option>
+                        <option value="data-science">Data Science</option>
+                        <option value="mobile-dev">Mobile Development</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="date-select">Date:</label>
+                    <input type="date" id="date-select">
+                </div>
+            </div>
+
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                        <th>Attendance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>ST001</td>
+                        <td>
+                            <div class="attendance-status">
+                                <button class="status-btn present-btn">Present</button>
+                                <button class="status-btn absent-btn">Absent</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>ST002</td>
+                        <td>
+                            <div class="attendance-status">
+                                <button class="status-btn present-btn">Present</button>
+                                <button class="status-btn absent-btn">Absent</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mike Johnson</td>
+                        <td>ST003</td>
+                        <td>
+                            <div class="attendance-status">
+                                <button class="status-btn present-btn">Present</button>
+                                <button class="status-btn absent-btn">Absent</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="save-btn">Save Attendance</button>
+        </main>
+    </div>
+
+    <script src="https://kit.fontawesome.com/your-kit-code.js"></script>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.querySelector('.dashboard-container').classList.toggle('show-sidebar');
+        }
+
+        // Add active class to current nav item
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-link.active')?.classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+
+        // Attendance status toggle
+        document.querySelectorAll('.status-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const siblingBtn = this.parentElement.querySelector('.status-btn:not(.active)');
+                this.classList.add('active');
+                siblingBtn.classList.remove('active');
+            });
+        });
+
+        // Save attendance (placeholder functionality)
+        document.querySelector('.save-btn').addEventListener('click', function() {
+            alert('Attendance saved successfully!');
+        });
+    </script>
+</body>
+</html>
